@@ -11,14 +11,14 @@ const PieChart = ({ sortedTransaction }) => {
   const [expenseChart, setExpenseChart] = useState(false);
 
   let spendingData = sortedTransaction.filter((transaction) => {
-    if (transaction.type === "expense") {
+    if (transaction.type.toLowerCase() === "expense") {
       return { tag: transaction.tag, amount: transaction.amount };
     }
   })
 
   let earningData = sortedTransaction.filter((transaction) => {
     if (transaction.type === "income"){
-      return{ tag : transaction.tag , amount: transaction.amount} ;
+      return{ tag: transaction.tag , amount: transaction.amount} ;
     }
   })
 
@@ -34,19 +34,17 @@ const PieChart = ({ sortedTransaction }) => {
     investment: 0,
   };
 
-  for (let ele of Object.values(spendingData)) {
-    console.log(ele);
-    if (ele.tag === "office") {
-      expTags.office = expTags.office + ele.amount;
-    } else if (ele.tag === "education") {
-      expTags.education = expTags.office + ele.amount;
-    } else if (ele.tag === "food") {
-      expTags.food = expTags.food + ele.amount;
+  for(let value of Object.values(spendingData)) {
+    if(value.tag === "office") {
+      expTags.office += parseInt(value.amount);
+    } else if (value.tag === "education") {
+      expTags.education += parseInt(value.amount);
+    } else if (value.tag === "food" ) {
+      expTags.food += parseInt(value.amount);
     }
   }
 
   for (let ele of Object.values(earningData)) {
-    // console.log(ele);
     if (ele.tag === "salary") {
       incomeTag.salary = incomeTag.salary + ele.amount;
     } else if (ele.tag === "freelance") {
@@ -76,7 +74,6 @@ const PieChart = ({ sortedTransaction }) => {
       },
     ],
   };
-
 
   return (
     <div className="w-[35%] p-8 my-8 ml-4 mr-8 bg-white shadowBox flex flex-col justify-between ">

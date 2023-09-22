@@ -146,7 +146,9 @@ const Dashboard = () => {
       <>
         {
           loader ? 
-          <div className="flex h-screen items-center justify-center"><PageLoader /></div>
+          <div className="flex h-screen items-center justify-center">
+            <PageLoader />
+          </div>
             :
             <>
               <Cards
