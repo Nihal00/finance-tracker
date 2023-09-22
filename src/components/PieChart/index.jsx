@@ -17,7 +17,7 @@ const PieChart = ({ sortedTransaction }) => {
   })
 
   let earningData = sortedTransaction.filter((transaction) => {
-    if (transaction.type === "income"){
+    if (transaction.type === "income") {
       return{ tag: transaction.tag , amount: transaction.amount} ;
     }
   })
